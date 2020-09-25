@@ -7,7 +7,7 @@
 % Lab 2
 % Problem 1
 % Created 9/11/2020
-function xdot = quadrotorODE(t,x,m,radius,km,Ix,Iy,Iz,n,mu,Z_c,f1,f2,f3,f4)
+function xdot = quadrotorODE(t,x,m,Ix,Iy,Iz,n,mu,Z_c,Lc,Mc,Nc)
 %
 % Inputs: Constants, Forces, state vector 
 %
@@ -25,7 +25,7 @@ V_a = norm([u_E;v_E;w_E]);
 aeroForces = -n*V_a*[u_E;v_E;w_E]; % Calculates Aero forces 
 
 %Control moments 
-aeroMomentControl = [(radius/sqrt(2))*(-f1-f2+f3+f4); (radius/sqrt(2))*(f1-f2-f3+f4); km*(f1-f2+f3-f4)];
+aeroMomentControl = [Lc; Mc; Nc];
 %Transformation matrix also in first set of equations of motion 
 transMat = [cosd(theta)*cosd(psi) sind(phi)*sind(theta)*cosd(psi)-cosd(phi)*sind(psi) cosd(phi)*sind(theta)*cosd(psi)+sind(phi)*sind(psi);cosd(theta)*sind(psi) sind(phi)*sind(theta)*sind(psi)+cosd(phi)*cosd(psi) cosd(phi)*sind(theta)*sind(psi)-sind(phi)*cosd(psi);-sind(theta) sind(phi)*cosd(theta) cosd(phi)*cosd(theta)];
 
