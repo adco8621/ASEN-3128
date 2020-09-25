@@ -39,7 +39,7 @@ x0 = [0 ;0 ;0 ;0 ;5 ;0 ;0 ;0 ;0 ;0 ;0 ;0]; % x0 = [x_E ;y_E ;z_E ;phi ;theta ;ps
 [t1, out1] = ode45(@(t1,x) quadrotorODE(t1,x,m,radius,km,Ix,Iy,Iz,n,mu,Zc,f1,f2,f3,f4), tspan,x0);
 
 % State Vector for hoevring steady flight with 5 degree yaw
-x0 = [0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;0]; % x0 = [x_E ;y_E ;z_E ;phi ;theta ;psi ;u_E ;v_E ;w_E ;p ;q ;r]
+x0 = [0 ;0 ;0 ;0 ;0 ;5 ;0 ;0 ;0 ;0 ;0 ;0]; % x0 = [x_E ;y_E ;z_E ;phi ;theta ;psi ;u_E ;v_E ;w_E ;p ;q ;r]
 [t2, out2] = ode45(@(t2,x) quadrotorODE(t2,x,m,radius,km,Ix,Iy,Iz,n,mu,Zc,f1,f2,f3,f4), tspan,x0);
 
 % State Vector for hoevring steady flight with 0.1 rad/sec roll rate
@@ -54,167 +54,19 @@ x0 = [0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;rad2deg(0.1) ;0]; % x0 = [x_E ;y_E ;z_E ;phi
 x0 = [0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;rad2deg(0.1)]; % x0 = [x_E ;y_E ;z_E ;phi ;theta ;psi ;u_E ;v_E ;w_E ;p ;q ;r]
 [t5, out5] = ode45(@(t5,x) quadrotorODE(t5,x,m,radius,km,Ix,Iy,Iz,n,mu,Zc,f1,f2,f3,f4), tspan,x0);
 
-%% Plots for part 3a
-figure
-tiledlayout(3,1)
-% X - Position
-nexttile
-plot(t,out(:,1),'LineWidth',2)
-title('x- Position vs Time (3a)')
-xlabel('Time (sec)')
-ylabel('Distance (m)')
-% Y - position
-nexttile
-plot(t,out(:,2),'LineWidth',2)
-title('y- Position vs Time (3a)')
-xlabel('Time (sec)')
-ylabel('Distance (m)')
-% Z - Position
-nexttile
-plot(t,out(:,3),'LineWidth',2)
-title('z- Position vs Time (3a)')
-xlabel('Time (sec)')
-ylabel('Distance (m)')
+%% Plots for part 3
 
-figure
-tiledlayout(3,1)
-nexttile
-plot(t,out(:,4),'LineWidth',2)
-title('Phi vs Time (3a)')
-xlabel('Time (sec)')
-ylabel('Angle (degrees)')
-% Y - position
-nexttile
-plot(t,out(:,5),'LineWidth',2)
-title('Theta vs Time (3a)')
-xlabel('Time (sec)')
-ylabel('Angle (degrees)')
-% Z - Position
-nexttile
-plot(t,out(:,6),'LineWidth',2)
-title('Psi vs Time (3a)')
-xlabel('Time (sec)')
-ylabel('Angle (degrees)')
+PlotAircraftSim(t,out,ones(length(t),4)*f1,'-b')
+hold on
+PlotAircraftSim(t1,out1,ones(length(t1),4)*f1,'-r')
+hold on
+PlotAircraftSim(t2,out2,ones(length(t2),4)*f1,'-k')
+hold on
+PlotAircraftSim(t3,out3,ones(length(t3),4)*f1,':b')
+hold on
+PlotAircraftSim(t4,out4,ones(length(t4),4)*f1,':r')
+hold on
+PlotAircraftSim(t5,out5,ones(length(t5),4)*f1,':k')
 
-figure
-tiledlayout(3,1)
-nexttile
-plot(t,out(:,7),'LineWidth',2)
-title('x- Velocity vs Time (3a)')
-xlabel('Time (sec)')
-ylabel('Velocity (m/s)')
-% Y - position
-nexttile
-plot(t,out(:,8),'LineWidth',2)
-title('y- Velocity vs Time (3a)')
-xlabel('Time (sec)')
-ylabel('Velocity (m/s)')
-% Z - Position
-nexttile
-plot(t,out(:,9),'LineWidth',2)
-title('z- Velocity vs Time (3a)')
-xlabel('Time (sec)')
-ylabel('Velocity (m/s)')
 
-figure
-tiledlayout(3,1)
-nexttile
-plot(t,out(:,10),'LineWidth',2)
-title('x- Angular Velocity vs Time (3a)')
-xlabel('Time (sec)')
-ylabel('Velocity (rad/s)')
-% Y - position
-nexttile
-plot(t,out(:,11),'LineWidth',2)
-title('y- Angular Velocity vs Time (3a)')
-xlabel('Time (sec)')
-ylabel('Velocity (rad/s)')
-% Z - Position
-nexttile
-plot(t,out(:,12),'LineWidth',2)
-title('z- Angular Velocity vs Time (3a)')
-xlabel('Time (sec)')
-ylabel('Velocity (rad/s)')
-
-%% Plots for part 3d
-figure
-tiledlayout(3,1)
-% X - Position
-nexttile
-plot(t3,out3(:,1),'LineWidth',2)
-title('x- Position vs Time (3d)')
-xlabel('Time (sec)')
-ylabel('Distance (m)')
-% Y - position
-nexttile
-plot(t3,out3(:,2),'LineWidth',2)
-title('y- Position vs Time (3d)')
-xlabel('Time (sec)')
-ylabel('Distance (m)')
-% Z - Position
-nexttile
-plot(t3,out3(:,3),'LineWidth',2)
-title('z- Position vs Time (3d)')
-xlabel('Time (sec)')
-ylabel('Distance (m)')
-
-figure
-tiledlayout(3,1)
-nexttile
-plot(t3,out3(:,4),'LineWidth',2)
-title('Phi vs Time (3d)')
-xlabel('Time (sec)')
-ylabel('Angle (degrees)')
-% Y - position
-nexttile
-plot(t3,out3(:,5),'LineWidth',2)
-title('Theta vs Time (3d)')
-xlabel('Time (sec)')
-ylabel('Angle (degrees)')
-% Z - Position
-nexttile
-plot(t3,out3(:,6),'LineWidth',2)
-title('Psi vs Time (3d)')
-xlabel('Time (sec)')
-ylabel('Angle (degrees)')
-
-figure
-tiledlayout(3,1)
-nexttile
-plot(t3,out3(:,7),'LineWidth',2)
-title('x- Velocity vs Time (3d)')
-xlabel('Time (sec)')
-ylabel('Velocity (m/s)')
-% Y - position
-nexttile
-plot(t3,out3(:,8),'LineWidth',2)
-title('y- Velocity vs Time (3d)')
-xlabel('Time (sec)')
-ylabel('Velocity (m/s)')
-% Z - Position
-nexttile
-plot(t3,out3(:,9),'LineWidth',2)
-title('z- Velocity vs Time (3d)')
-xlabel('Time (sec)')
-ylabel('Velocity (m/s)')
-
-figure
-tiledlayout(3,1)
-nexttile
-plot(t3,out3(:,10),'LineWidth',2)
-title('x- Angular Velocity vs Time (3d)')
-xlabel('Time (sec)')
-ylabel('Velocity (rad/s)')
-% Y - position
-nexttile
-plot(t3,out3(:,11),'LineWidth',2)
-title('y- Angular Velocity vs Time (3d)')
-xlabel('Time (sec)')
-ylabel('Velocity (rad/s)')
-% Z - Position
-nexttile
-plot(t3,out3(:,12),'LineWidth',2)
-title('z- Angular Velocity vs Time (3d)')
-xlabel('Time (sec)')
-ylabel('Velocity (rad/s)')
 
