@@ -6,16 +6,22 @@ function [] = PlotAircraftSim(time,aircraft_state_array, control_input_array, co
 % x is for if you want to run it again while keeping the previous graphs
 % but not plotting over them. enter a number relative to what set of 6
 % graphs you arte currently plotting on
-global legend_labels;
+global uncontrolled uncontrolled_3D controlled controlled_3D;
+
+x=x-1;
 
 %% X Y Z Position
-figure(1*x)
+figure(1+6*x)
 subplot(3,1,1);
 plot(time,aircraft_state_array(:,1), col);
 hold on;
 ylabel('X Position')
 title('Position vs Time')
-legend(legend_labels);
+if x == 0
+    legend(uncontrolled);
+else
+    legend(controlled);
+end
 
 subplot(3,1,2);
 plot(time,aircraft_state_array(:,2), col);
@@ -30,12 +36,17 @@ ylabel('Z Position')
 set(gcf,'position',[200 350 510 330])
 
 %% Euler Angles
-figure(2*x)
+figure(2+6*x)
 subplot(3,1,1);
 plot(time,aircraft_state_array(:,4), col);
 hold on;
 ylabel('Roll [deg]')
 title('Euler Angles vs Time')
+if x == 0
+    legend(uncontrolled);
+else
+    legend(controlled);
+end
 
 subplot(3,1,2);
 plot(time,aircraft_state_array(:,5), col);
@@ -50,12 +61,17 @@ ylabel('Yaw [deg]')
 set(gcf,'position',[720 350 510 330])
 
 %% Velocity versus Time
-figure(3*x)
+figure(3+6*x)
 subplot(3,1,1);
 plot(time,aircraft_state_array(:,7), col);
 hold on;
 ylabel('uE [m/s]')
 title('Velocity vs Time')
+if x == 0
+    legend(uncontrolled);
+else
+    legend(controlled);
+end
 
 subplot(3,1,2);
 plot(time,aircraft_state_array(:,8), col);
@@ -70,12 +86,17 @@ ylabel('wE [m/s]')
 set(gcf,'position',[200 35 510 340])
 
 %% Angular Velocity versus Time
-figure(4*x)
+figure(4+6*x)
 subplot(3,1,1);
 plot(time,aircraft_state_array(:,10), col);
 hold on;
 ylabel('p [rad/s]')
 title('Angular Velocity vs Time')
+if x == 0
+    legend(uncontrolled);
+else
+    legend(controlled);
+end
 
 subplot(3,1,2);
 plot(time,aircraft_state_array(:,11), col);
@@ -89,12 +110,17 @@ xlabel('Time')
 ylabel('r [rad/s]')
 set(gcf,'position',[720 35 510 340])
 %% Control forces
-figure(5*x)
+figure(5+6*x)
 subplot(4, 1, 1);
 plot(time,control_input_array(:,1), col);
 hold on;
 ylabel('f1 (N)')
 title('Control Forces vs. Time')
+if x == 0
+    legend(uncontrolled);
+else
+    legend(controlled);
+end
 
 subplot(4, 1, 2);
 plot(time,control_input_array(:,2), col);
@@ -112,12 +138,16 @@ hold on;
 ylabel('f4 (N)')
 xlabel('Time')
 %% 3D flight path plot
-figure(6*x)
-plot3(aircraft_state_array(:, 1), aircraft_state_array(:, 2), aircraft_state_array(:, 3), col);
+figure(6+6*x)
+p = plot3(aircraft_state_array(:, 1), aircraft_state_array(:, 2), aircraft_state_array(:, 3), col);
 hold on;
 grid on;
 plot3(aircraft_state_array(1, 1), aircraft_state_array(1, 2), aircraft_state_array(1, 3), 'go');
 plot3(aircraft_state_array(end, 1), aircraft_state_array(end, 2), aircraft_state_array(end, 3), 'ro');
-title('Flight Path');
+if x == 0
+    legend(uncontrolled_3D);
+else
+    legend(controlled_3D);
+end
 end
 

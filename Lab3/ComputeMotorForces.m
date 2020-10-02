@@ -6,6 +6,7 @@ function motor_forces = ComputeMotorForces(Zc, Lc, Mc, Nc, R, km)
         R/sqrt(2), -R/sqrt(2), -R/sqrt(2), R/sqrt(2); 
         km, -km, km, -km];
     allforces = [Zc, Lc, Mc, Nc];
-    motor_forces = allforces\mom2fs;
+    
+    motor_forces = inv(mom2fs)*allforces';
 
 end
