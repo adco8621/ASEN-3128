@@ -3,7 +3,7 @@ function [] = PlotAircraftSim(time,aircraft_state_array, control_input_array, co
 % Aircraft_state_array fed out from the ODE call
 % control_input_array is the motor forces
 % Specify color using col
-
+global legend_labels;
 
 %% X Y Z Position
 figure(1)
@@ -12,6 +12,7 @@ plot(time,aircraft_state_array(:,1), col);
 hold on;
 ylabel('X Position')
 title('Position vs Time')
+legend(legend_labels);
 
 subplot(3,1,2);
 plot(time,aircraft_state_array(:,2), col);
