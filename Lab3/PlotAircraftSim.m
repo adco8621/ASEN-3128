@@ -6,7 +6,7 @@ function [] = PlotAircraftSim(time,aircraft_state_array, control_input_array, co
 % x is for if you want to run it again while keeping the previous graphs
 % but not plotting over them. enter a number relative to what set of 6
 % graphs you arte currently plotting on
-
+global legend_labels;
 
 %% X Y Z Position
 figure(1*x)
@@ -15,6 +15,7 @@ plot(time,aircraft_state_array(:,1), col);
 hold on;
 ylabel('X Position')
 title('Position vs Time')
+legend(legend_labels);
 
 subplot(3,1,2);
 plot(time,aircraft_state_array(:,2), col);
