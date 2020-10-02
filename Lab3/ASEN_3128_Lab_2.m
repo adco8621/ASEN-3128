@@ -6,7 +6,7 @@
 % FILENAME 
 % Lab 2
 % Created 9/11/2020
- clear all 
+ clear
  close all 
  clc 
  
@@ -53,14 +53,30 @@ x0 = [0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;rad2deg(0.1) ;0]; % x0 = [x_E ;y_E ;z_E ;phi
 x0 = [0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;rad2deg(0.1)]; % x0 = [x_E ;y_E ;z_E ;phi ;theta ;psi ;u_E ;v_E ;w_E ;p ;q ;r]
 [t5, out5] = ode45(@(t5,x) quadrotorODE(t5,x,m,Ix,Iy,Iz,n,mu,Zc,Lc,Mc,Nc), tspan,x0);
 
+% State Vector for hoevring steady controlled flight with 0.1 rad/sec roll rate
+x0 = [0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;rad2deg(0.1) ;0 ;0]; % x0 = [x_E ;y_E ;z_E ;phi ;theta ;psi ;u_E ;v_E ;w_E ;p ;q ;r]
+[t6, out6] = ode45(@(t3,x) quadrotorODE_controlled(t3,x,m,Ix,Iy,Iz,n,mu,Zc,Lc,Mc,Nc), tspan,x0);
+
+% State Vector for hoevring steady controlled flight with 0.1 rad/sec pitch rate
+x0 = [0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;rad2deg(0.1) ;0]; % x0 = [x_E ;y_E ;z_E ;phi ;theta ;psi ;u_E ;v_E ;w_E ;p ;q ;r]
+[t7, out7] = ode45(@(t4,x) quadrotorODE_controlled(t4,x,m,Ix,Iy,Iz,n,mu,Zc,Lc,Mc,Nc), tspan,x0);
+
+% State Vector for hoevring steady controlled flight with 0.1 rad/sec yaw rate
+x0 = [0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;rad2deg(0.1)]; % x0 = [x_E ;y_E ;z_E ;phi ;theta ;psi ;u_E ;v_E ;w_E ;p ;q ;r]
+[t8, out8] = ode45(@(t5,x) quadrotorODE_controlled(t5,x,m,Ix,Iy,Iz,n,mu,Zc,Lc,Mc,Nc), tspan,x0);
+
+
 %% Plots for part 3
 
-PlotAircraftSim(t,out,ones(length(t),4)*Zc/4,'-b')
-PlotAircraftSim(t1,out1,ones(length(t1),4)*Zc/4,'-r')
+PlotAircraftSim(t,out,ones(length(t),4)*Zc/4,'-b',1)
+PlotAircraftSim(t1,out1,ones(length(t1),4)*Zc/4,'-r',1)
 PlotAircraftSim(t2,out2,ones(length(t2),4)*Zc/4,'-k')
 PlotAircraftSim(t3,out3,ones(length(t3),4)*Zc/4,':b')
 PlotAircraftSim(t4,out4,ones(length(t4),4)*Zc/4,':r')
 PlotAircraftSim(t5,out5,ones(length(t5),4)*Zc/4,':k')
-
-
+hold off
+figure
+PlotAircraftSim(t6,out6,ones(length(t6),4)*Zc/4,'-b')
+PlotAircraftSim(t7,out7,ones(length(t7),4)*Zc/4,'-r')
+PlotAircraftSim(t8,out8,ones(length(t8),4)*Zc/4,'-k')
 

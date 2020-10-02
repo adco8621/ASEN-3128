@@ -1,14 +1,17 @@
-function [] = PlotAircraftSim(time,aircraft_state_array, control_input_array, col)
+function [] = PlotAircraftSim(time,aircraft_state_array, control_input_array, col,x)
 %% Plots each of the 12 states versus time for a given input of time and
 % Aircraft_state_array fed out from the ODE call
 % control_input_array is the motor forces
 % Specify color using col
+% x is for if you want to run it again while keeping the previous graphs
+% but not plotting over them. enter a number relative to what set of 6
+% graphs you arte currently plotting on
 
 
 %% X Y Z Position
-figure(1)
+figure(1*x)
 subplot(3,1,1);
-plot(time,aircraft_state_array(:,1), col); 
+plot(time,aircraft_state_array(:,1), col);
 hold on;
 ylabel('X Position')
 title('Position vs Time')
@@ -26,7 +29,7 @@ ylabel('Z Position')
 set(gcf,'position',[200 350 510 330])
 
 %% Euler Angles
-figure(2)
+figure(2*x)
 subplot(3,1,1);
 plot(time,aircraft_state_array(:,4), col);
 hold on;
@@ -46,7 +49,7 @@ ylabel('Yaw [deg]')
 set(gcf,'position',[720 350 510 330])
 
 %% Velocity versus Time
-figure(3)
+figure(3*x)
 subplot(3,1,1);
 plot(time,aircraft_state_array(:,7), col);
 hold on;
@@ -66,7 +69,7 @@ ylabel('wE [m/s]')
 set(gcf,'position',[200 35 510 340])
 
 %% Angular Velocity versus Time
-figure(4)
+figure(4*x)
 subplot(3,1,1);
 plot(time,aircraft_state_array(:,10), col);
 hold on;
@@ -85,7 +88,7 @@ xlabel('Time')
 ylabel('r [rad/s]')
 set(gcf,'position',[720 35 510 340])
 %% Control forces
-figure(5)
+figure(5*x)
 subplot(4, 1, 1);
 plot(time,control_input_array(:,1), col);
 hold on;
@@ -108,7 +111,7 @@ hold on;
 ylabel('f4 (N)')
 xlabel('Time')
 %% 3D flight path plot
-figure(6)
+figure(6*x)
 plot3(aircraft_state_array(:, 1), aircraft_state_array(:, 2), aircraft_state_array(:, 3), col);
 hold on;
 grid on;
