@@ -91,7 +91,7 @@ PlotAircraftSim(t7,out7,force7','-r',2)
 PlotAircraftSim(t8,out8,force8','-k',2)
 %% Problem 4
 % State Vector for hoevring steady flight with 5 degree roll
-Tfinal = 1;
+Tfinal = 2;
 x0 = [0 ;0 ;0 ;5 ;0 ;0 ;0 ;0 ;0 ;0 ;0 ;0]; % x0 = [x_E ;y_E ;z_E ;phi ;theta ;psi ;u_E ;v_E ;w_E ;p ;q ;r]
 [out9,t9] = LinearizedEOM(x0,Tfinal);
 
@@ -121,6 +121,6 @@ PlotAircraftSim(t10,out10,ones(length(t10),4)*Zc/4,'- 0.75 0 0.75',1)
 PlotAircraftSim(t11,out11,ones(length(t11),4)*Zc/4,'- 0 0.5 0',1)
 PlotAircraftSim(t12,out12,ones(length(t12),4)*Zc/4,'- 1 0.4 0.7',1)
 PlotAircraftSim(t13,out13,ones(length(t13),4)*Zc/4,'- 0.9290 0.6940 0.1250',1)
-PlotAircraftSim(t14,out14,ones(length(t14),4)*Zc/4,':y',1)
+PlotAircraftSim(t14,out14,ones(length(t14),4)*Zc/4,'- 0.8 0.3 0.3',1)
 
 
