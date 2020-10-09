@@ -35,7 +35,7 @@ ylabel('Y Position [m]')
 subplot(7,1,[5,6]);
 plot(time,aircraft_state_array(:,3),'LineStyle',linestyle,'Color', col);
 hold on;
-xlabel('Time')
+xlabel('Time [s]')
 ylabel('Z Position [m]')
 set(gcf,'position',[200 330 710 450])
 if x == 0
@@ -62,7 +62,7 @@ ylabel('Pitch [deg]')
 subplot(7,1,[5,6]);
 plot(time,aircraft_state_array(:,6),'LineStyle',linestyle,'Color', col);
 hold on;
-xlabel('Time')
+xlabel('Time [s]')
 ylabel('Yaw [deg]')
 set(gcf,'position',[720 330 710 450])
 
@@ -89,7 +89,7 @@ ylabel('v^E [m/s]')
 subplot(7,1,[5,6]);
 plot(time,aircraft_state_array(:,9),'LineStyle',linestyle,'Color', col);
 hold on;
-xlabel('Time')
+xlabel('Time [s]')
 ylabel('w^E [m/s]')
 set(gcf,'position',[200 35 710 450])
 
@@ -105,19 +105,19 @@ figure(4+6*x)
 subplot(7,1,[1,2]);
 plot(time,aircraft_state_array(:,10),'LineStyle',linestyle,'Color', col);
 hold on;
-ylabel('p [rad/s]')
+ylabel('p [deg/s]')
 title('Angular Velocity vs Time')
 
 subplot(7,1,[3,4]);
 plot(time,aircraft_state_array(:,11),'LineStyle',linestyle,'Color', col);
 hold on;
-ylabel('q [rad/s]')
+ylabel('q [deg/s]')
 
 subplot(7,1,[5,6]);
 plot(time,aircraft_state_array(:,12),'LineStyle',linestyle,'Color', col);
 hold on;
-xlabel('Time')
-ylabel('r [rad/s]')
+xlabel('Time [s]')
+ylabel('r [deg/s]')
 set(gcf,'position',[720 35 710 450])
 if x == 0
     lgd = legend(uncontrolled);
@@ -148,7 +148,7 @@ subplot(9, 1, [7,8]);
 plot(time,control_input_array(:,4),'LineStyle',linestyle,'Color', col);
 hold on;
 ylabel('f4 (N)')
-xlabel('Time')
+xlabel('Time [s]')
 if x == 0
     lgd = legend(uncontrolled);
     set(lgd,'Position',[0.3 0.05 0.4 0.05],'NumColumns',4,'Orientation','horizontal')
